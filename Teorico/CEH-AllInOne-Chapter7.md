@@ -58,13 +58,13 @@ Operates in two ways:
 # Wireless Authentication
 
 ## 1. Open System Authentication
-![Open System Authentication](image.png)
+![Open System Authentication](/assets/Open%20System%20Authentication.png)
 
 ## 2. Shared Key Authentication
-![Shared Key Authentication](image-2.png)
+![Shared Key Authentication](/assets/Shared%20Key%20Authentication.png)
 
 ## 3. Centralized Authentication
-![Centralized Authentication](image-3.png)
+![Centralized Authentication](/assets/Centralized%20Authentication.png)
 
 ---
     Association
