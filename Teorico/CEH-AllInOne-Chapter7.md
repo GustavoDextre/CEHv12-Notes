@@ -58,13 +58,13 @@ Operates in two ways:
 # Wireless Authentication
 
 ## 1. Open System Authentication
-![Open System Authentication](/assets/Open%20System%20Authentication.png)
+![Open System Authentication](https://www.cleartosend.net/wp-content/uploads/2018/07/802.11-authentication-and-association.png)
 
 ## 2. Shared Key Authentication
-![Shared Key Authentication](/assets/Shared%20Key%20Authentication.png)
+![Shared Key Authentication](https://www.researchgate.net/publication/322112635/figure/fig1/AS:576700439773184@1514507507811/Message-flow-by-shared-key-authentication45.png)
 
 ## 3. Centralized Authentication
-![Centralized Authentication](/assets/Centralized%20Authentication.png)
+![Centralized Authentication](https://www.techtarget.com/rms/onlineimages/remote_access_using_radius_protocol-f_mobile.png)
 
 ---
     Association
