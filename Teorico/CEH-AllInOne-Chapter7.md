@@ -61,7 +61,7 @@ Operates in two ways:
 ![Open System Authentication](https://www.cleartosend.net/wp-content/uploads/2018/07/802.11-authentication-and-association.png)
 
 ## 2. Shared Key Authentication
-![Shared Key Authentication](https://www.researchgate.net/publication/322112635/figure/fig1/AS:576700439773184@1514507507811/Message-flow-by-shared-key-authentication45.png)
+![Shared Key Authentication](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTM8U0uTR0cGTH2CsjReSV7F3ZmS3ipxvAGLA&s)
 
 ## 3. Centralized Authentication
 ![Centralized Authentication](https://www.techtarget.com/rms/onlineimages/remote_access_using_radius_protocol-f_mobile.png)
