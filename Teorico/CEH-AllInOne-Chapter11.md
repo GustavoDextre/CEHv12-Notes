@@ -306,3 +306,60 @@ There are several ways to communicate securely with another one, but the exam, w
   - Follows OpenPGP standard
   - It is known as hybrid, because it uses features of conventional and public key cryptography.
 
+> S/MIME (Secure/Multipurpose Internet Mail Extentions), developed by RSA Data Security, and it is a standard for public key encryption and signing of MIME data. The main difference between PGP and S/MIME is that PGP can be used to encrypt not only e-mail messages, but also files and entire drives.
+
+Despite these methods are "secure" methodsof communications, there is always a probability that these could be vulnerated. For example, in 2014, was a bad year for SSL due to the emergence of Heartbleed and POODLE, apparently came out of nowhere. 
+
+    Heartbleed
+    ----------
+    -Exploits a small feature in OpenSSL
+    -OpenSSL uses a heartbeat during an open session to verify that data was received correctly, does this by "echoing" data back to the other system.
+    -An attacker sends a single byte of data while telling the server it sent 64Kb of data, the server will send back 64Kb of random data from its memory
+    -In memory, there could be names, passwords, private keys, cookies, and a host. 
+
+The following command is used to search for Heartbleed vulnerability: the expected response would be **State: NOT VULNERABLE**
+```bash
+nmap -d --script ssl-heartbleed --script-args vulns.showall -sV [host]
+```
+In metasploit the module related is **openssl_heartbleed**.
+It is also woth to mention **reverse Heartbleed** (where servers are able to perfom the same thing in reverse, stealing data from clients).
+
+> FREAK (Factoring Attack on RSA-EXPORT Keys) is a man-in-the-middle attack that forces a downgrade of RSA key to a weaker length. The attacker forces the use of a weaker encryption key length, enabling succesful brute-force attacks.
+
+    POODLE (Padding Oracle On Downgraded Legacy)
+    --------------------------------------------
+    -A matter of backward compatibility
+    -TLS clients perform handshake, designed to degrade service until something acceotable was found.
+    -A hacker could intercept the communication in the handshake, making them fall, which results in the dropping to SSL 3.0 (use RC4)
+    -SSL 3.0 allows padding data at the end of a block cipher to be changed, which is less secure, usually called "RC4 biases" (https://openssl-library.org/files/ssl-poodle.pdf)
+    -Mitigation this, it is basically not using SSL 3.0 at all; completely disabling it on the client and server side means the "degradation dance" can't ever take things down to SSL 3.0
+    -Another way to mitigate is by implementing TLS_FALLBACK_SCSV to prevent POODLE (browsers like Google and Firefox use it)
+    -Or finally using "anti-POODLE" record splitting
+
+Additionally, another attack worth to mention is **DROWN** (Decrypting RSA with Obsolete and Weakened eNcryption), per the website (https://drownattack.com/), this vulnerability affects services thar rely on SSL/TLS like HTTPS for example, attackers can break the encryption and gather everything (including sensitive information). The mitigation is similar to POODLE: turn off support for SSLv2, and server operations need to ensure that their private keys are not used anywhere that supports SSLv2 connections.
+
+> Antoher note to be taken into account is:
+> <br> - CVE-2014-0160 ---> Heartbleed
+> <br> - CVE-2014-3566 ---> POODLE (aka PoodleBleed)
+
+### 2. Cryptography Attacks
+
+We will list some methods or tools to crack encryption:
+
+- **Known plain-text attack**: The use of plain and their cipher texts, the more, the better. By comparing these, over the time, we can get the key.
+- **Chosen plain-text attack**: The attacker encrypts multiple plain-text copies himself in order to gain the key.
+- **Adaptive chosen plain-text attack**: The attacker sends bunches of cipher texts to be encrypted and then uses the results of the decryptions to select different, closely related cipher texts.
+- **Cipher-text-only attack**: Hacker gains copies of several messages encrypted with the same algorithm, and then use statistical analysis to reveal, eventually, repeating code, which is used to decode the message.
+- **Replay attack**: The most often used in Man-in-the-Middle Attack. This is based on the repetition (in the time right) of a portion of a cryptographic exchange to fool the system and set up a channel. Session tokens is used to combat this attack.
+- **Chosen cipher attack**: chosen a particular cipher-text message and tries to get the key through comparative analysis with multiple keys and a plain-text version. RSA is particularly vulnerable to this attack.
+----
+- **Side-chanel attack**: It is not like the other ones, it is a physical attack that monitors environmental factors (like power consumption, timing, and delay) on the cryptosystem itself.
+
+Some tools for cracking:
+- Carnivore and Magic Lantern (created by US government to FBI)
+- L0phtcrack (https://l0phtcrack.gitlab.io/)
+- John the Ripper
+- PGPCrack
+- CrypTool (https://www.cryptool.org/en/)
+- CryptoBench (https://cryptobench.org/)
+
