@@ -119,7 +119,7 @@ Uses AES-GCMP-256 for encryption and HAMC-SHA-384 for authentication.
 
 **WPA** --> Pre-shared key is vulnerable to eavesdropping and offline attack, and its TKIP  function is vulnerable to packet spoofing.
 
-**WPA2** --> Has the same Pre-shaed key issues like WPA, and the so-called Hole 196 vulnerability makes it vulnerable to man in the middle attack and DoS (Denial of Services).
+**WPA2** --> Has the same Pre-shaed key issues like WPA, and the so-called Hole 196 vulnerability (https://www.infosecurity-magazine.com/blogs/wpa2-exposed-with-hole-196-vulnerability) makes it vulnerable to man in the middle attack and DoS (Denial of Services).
 
 # Wireless Hacking 
 

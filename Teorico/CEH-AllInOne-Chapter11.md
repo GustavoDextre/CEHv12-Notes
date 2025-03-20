@@ -248,7 +248,7 @@ Content of a digital certificate:
 When someone applies to get a certificate, CA will sign the certificate of the applicant before he sent it using the CA's *private key*. And the only key to decrypt it, it is the CA's public key, which is readily to anyone in the PKI infrastructure. 
 
 - **Signed Certificates**: It is created internally only for those purposes, e.g. authentication via certificates for internal applications or services. It is common to find it even in enterprise-level netowrks. It is easy to put in place, due to user generate and signs (using his own private key) his own certificate.
-- **Self-signed Certificates**: Indicate the CA is involved and the signature validating the identity of the entity is confirmed via an external source. For external connectivity requires this kond of certificate.
+- **Self-signed Certificates**: Indicate the CA is involved and the signature validating the identity of the entity is confirmed via an external source. For external connectivity requires this kind of certificate.
 
 > Case of compromising root companies (root CA that companies usually trust): https://www.csoonline.com/article/548734/hacking-the-real-security-issue-behind-the-comodo-hack.html
 
