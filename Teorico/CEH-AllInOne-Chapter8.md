@@ -178,12 +178,115 @@ We will list some architecture layers inside IoT:
 
 To know more about the OWASP Project: https://owasp.org/www-project-internet-of-things/
 
->EC Council considers as well OWASP IoT Attack Surface Areas (https://wiki.owasp.org/index.php/OWASP_Internet_of_Things_Project#tab=IoT_Attack_Surface_Areas), which in total there are 18 attack surface areas.
+> EC Council considers as well OWASP IoT Attack Surface Areas (https://wiki.owasp.org/index.php/OWASP_Internet_of_Things_Project#tab=IoT_Attack_Surface_Areas), which in total there are 18 attack surface areas.
 
+Examples of some IoT attacks:
+- DDoS:  It can be carry out similar to DDoS from any other device. One version is the *sybil* attack, multiple forged identities are used to create the illusion of traffic congestion that affects everyone else in the local IoT network.
+- Rolling Code: The code used by key fob to unlock start a car is called *rolling* (or *hopping*) code. This attack can sniff for the first part of the code, jam the key fob, and sniff/copy the second part on the subsequent attempts, allowing the attacker to steal the code, and the car. You can use HackRF One (https://greatscottgadgets.com/hackrf/) to pull this off.
+- BlueBorne: Amalgamation of techniques and attacks against known, Bluetooth vulnerabilities.
+- Malware --> e.g. Mirai 
+- Ransomware
+- MiTM
+- HVAC -> Shut down air conditioning services
+- Fault Injection (aka Perturbation): A malicious actor injects a faulty signal into the system. There are four types:
+  - Optical, EMFI (Electromagnet fault injection) or Body Bias Injection (BBI; using laser or electromagnetic pulses)
+  - Power or Clock glitching (affecting power supply or clock)
+  - Frequency or voltage tampering (tampering with operating conditions themselves)
+  - Temperature attacks (altering temprature for the chip)
 
+<u>**IoT Hacking Methodology**</u>
+<br>The steps look so similar to the EC Council standard:
+1. **Information Gathering**: Reconnaissance and footprinting for IoT devices. It is often used *Shodan* (https://www.shodan.io) which is a search engine to find *everything*, devices connected to the internet.
+> Shodan requires registraron, it is highly recommended to hide as much as possible our identity; considering using TOR on a USB, create a fake e-mail account, and registrate with it.
+2. **Vulnerability Scanning**: Regarding IoT, there are som tools to mention:
+   - Nmap
+   - beSTORM (from Beyond Trust, https://www.beyondsecurity.com/bestorm.html)
+   - IoTsploit (https://iotsploit.co)
+   - IoT Inspector (https://www.iot-inspector.com)
+3. **Launching Attacks**: We'll mention some tools:
+   - Firmalyzer (https://firmalyzer.com) -> for performing active security assessments on IoT devices.
+   - KillerBee (https://github.com/riverloopsec/killerbee)
+   - JTAGulator (https://www.grandideastudio.com/jtagulator/)
+   - Attify Zigbee Framework (https://github.com/attify/Attify-Zigbee-Framework) -> provides a suite of tools for testing Zigbee devices.
+4. **Gaining Access** (e.g. using telnet is often in IoT)
+5. **Maintaining Access** (e.g. using telnet is often in IoT)
 
+> Some other tools for Information gathering: Censys (https://censys.io) and Thingful (https://www.thingful.net).
 
+To finish, it is also worthy to mention some defense mitigations suggested:
+- Removing unused accounts (guest and demo accounts) and services (Telnet)
+- Implementing IDS/IPS
+- Use of built-in lockout features
+- Encryption (e.g. VPN and strong authentication)
+- Disabling UPnP ports on routers
+- Monitoring traffic on port 48011 (commonly used for malicious traffic)
+- Catching up with patching and firmware updates
+- Use of DMZ zones for network segmentation and traffic control
 
+> Sniffer fot IoT traffic: Foren6 (https://cetic.github.io/foren6/) "leverages passive sniffer to reconstructs information from the network to support real-world Internet of Things applications where other means of debug (cabled or network-based monitoring) are too costly or impractical. Another sniffer to mention is CloudShark (https://www.qacafe.com/analysis-tools/cloudshark)
 
+---
 
+## OT Hacking
 
+It is defined by Gartner and NIST, as a "hardware and software that detects or causes a change through the direct monitoring and/or control of physical devices, processes and events in the enterprise". OT is everywhere around us: in factories, utilities, oil and gas system, and transportation, temperature controls, etc.
+
+Architecture of OT consists of several subsets, some of them are:
+- Supervisory control and data acquisition (SCADA)
+- Industrial control systems (ICS)
+- Remote Terminal Units (RTU)
+
+Some terms to get familiarized with and to memorize:
+- **Assets**: Physical and logical assets making up an OT system. 
+- **Zones** (aka **conduits**): These are network segmentation techniques.
+- **Industrial Network**: A network consisting of automated control systems.
+- **Business network**: Systems offering information infrastructure to the business.
+- **Industrial Protocols**: Include both serial and Ethernet communication protocols (like S7, CDA, CIP, etc).
+- **Perimeter**: It consists of, the network (a closed group of assets inside a boundary) or the electronic security perimeter (boundary between secure and insecure zones).
+- **Critical Infrastructure**: Physical and logical systems that must be protected, as harm or destruction could cause severe impact to safety, economy, or public health. 
+
+> **IIOT** -> the convergence of IoT and OT to bridge gaps between them. This allows for, and largely pushed into existence, Industry 4.0, bringing "smart manufacturing" and IoT applications into industrial operations.
+
+OT architecture is generally discussed and examined within something called the **Purdue Model**. The Purdue Enterprise Reference Architecture (PERA) is still widely usedblueprint for discussing and evaluating OT. It consists of 3 zones:
+- Manufacturing Zone (OT)
+- Enterprise Zone (IT)
+- Demilitarized Zone (DMZ) -> also known as the Industrial Demilitarized Zone (IDMZ)
+
+![Purdue Model example](https://www.researchgate.net/publication/349195440/figure/fig1/AS:989863574790163@1613013275868/CS-Purdue-Model-architecture.png)
+
+> Industrial Control System (ICS) can be controlled in three main models: 
+> <br>**One loop**: Are independent of the desired output (not measured and compared). Operates without any checks and balances and are expected to follow input commands regardless of the final result.
+> <br>**Closed loop**: Has the control action entirely dependent on the desired output. They measure, monitor and control the process using feedback to compare actual versus desired output.
+> <br>**Manual**: Rely on operator input.
+
+ICS architecture is a collection of different control systems (like SCADA, BPCS, RTU, and DCS systems) as well as their associated equipment and control mechanisms. ICS is usually seen in known activities, such as electricity, water and transportation of materials, gas or oil.
+
+**Distributed Control System (DCS)**: Large-scale, highly engineered system containing (usually) a central supervisory control unit and multiple input/output points that is used to control specific industry tasks. 
+
+**SCADA**: Centralized supervisory control system generally used for ocntrolling and monitoring industrial facilities and infrastructure. Consists of a control server (SCADA-MTU), communications devices, and distributed field sites (used to monitor and control specific operations).
+
+    Other acronyms to get to know:
+    PLC (Programmable logic controller)
+    BPCS (Basic process control system)
+    SIS (Safety instrumented systems)
+
+<u>**Security Concerns**</u>
+<br>There is methodology hacking for OT. However, it is the same that it was showed earlier:
+
+- Information gathering -> Shodan to get e.g. SCADA. We can use CRITIFENCE (https://www.critifence.com/critifence/) to find default passwords of SCADA.
+- Vulnerability Scanning -> scanning example: **nmap -Pn -sT -p 502 -script modbus-discover <*target IP*>**
+- Launching Attacks
+- Gaining Remote Access
+- Maintaining Access
+
+> Schneider Electric is a big player in the PLC realm, and Modbus is a data communications protocol they use within their PLCs. If you seach in Shodan for either Modbus, Schneider Electirc, or both (maybe with geographic operator) might show you a world of SCADA very close by.
+
+Some debug tools worthing to mention:
+- GDB (https://www.gnu.org/software/gdb)
+- Radare2 (https://github.com/radareorg/radare2)
+- OpenOCD (https://openocd.org/)
+- IDA Pro (https://hex-rays.com/)
+- Mestasploit (e.g. can be used for Modbus)
+- modbus-cli (https://github.com/tallakt/modbus-cli): Modbus master and slave communicate in plain text with no authentication. After identifying PLCs connected to the Internet, install modbus-cli and fire away. 
+
+> Modbus has announced they are replacing the term "master-slave" with "client-server"
