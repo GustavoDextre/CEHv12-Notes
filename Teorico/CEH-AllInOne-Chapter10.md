@@ -4,7 +4,7 @@
 
 *Malware* is fenerally defined as software designed to harm or secretly access a computer system without the owner's informed consent.
 
-Some malware components definitions, the following list doesn't include every single variant in the malware world - some may use all or only some of the entire list :
+Some malware components definitions, the following list doesn't include every single variant in the malware world - some may use all or only some of the entire list:
 - **Malicious code**: A command that delineates the basic functionality of the malware (e.g. stealing data)
 - **Payload**: A piece of software allowing control over the target after exploitation, or performing the intended action of the attacker.
 - **Exploit**: The code that takes advantage of system vulnerabilities to access data or install malware.
@@ -47,7 +47,7 @@ And exploit kits, such as Infinity, Bleeding Life, Crimepack, and Blackhole Expl
 
 > There are specific actions to take to evade AV on a system we're trying to infect. A few examples include breaking the Trojan into multiple segments and zipping them into a single file, converting an executable to VB script, and changing file extentions to match a known file type other than .exe. We can also use a hex editor to change the checksum for a file. And don't forget encryption.
 ---
- <u>**Trojans**</u>
+<u>**Trojans**</u>
 <br>It is a software that appears to perform a desirable function for the user prior to running or installing it but instead performs a function, usually without the user's knowledge, that steals information or otherwise harms the system (or data). To hackers, it is a method to gain, and maintain, access on a target machine.
 
 There are several categories for Trojans:
@@ -93,7 +93,30 @@ We'll list some default common port numbers used by specific Trojans:
 | Back Orifice 1.20/Deep BO | 31337, 31338 |
 | Devil | 65000 |
 
+Due to a possible open port, we have the responsibility to check which ports are beign used. For example in windows, there is the **netstat**:
 
+This command will show us all the connections and listening ports in numerical form. Shows all connections in one of several states - everything from SYN_SEND (indicating active open) to CLOSED (the server has received an ACK from the client and closed the connection).
+```Powershell
+netstat -an
+```
+![Example of netstat](https://cyberhades.ams3.cdn.digitaloceanspaces.com/imagenes/2008/09/netstat.jpg)
+
+And the next one, displays all active connections and the processes or applications that are using them, which is pretty valuable information in ferreting out spayware and malware.
+```Powershell
+netstat -b
+```
+Another option to check ports is CurrPorts from Nirsoft (https://www.nirsoft.net/utils/cports.html) that reports all open TCP/IP and UDP ports and maps them to the owning applications. This tool allow us to close unwanted TCP connections, kill the process that opened the ports, andsave the TCP/UDP ports information to an HTML file, XML file, or tab-delimited text file. Currports aldo automatically marks suspicious TCP/UDP ports owned by unidentified applications for us.
+
+> Process Explorer is a free tool from Windows Sysinternals (https://docs.microsoft.com/sysinternals) that comes highly recommended. Another tool from SysInternals is Autoruns, which is useful to figure out what runs at startup on our system.
+
+In windows, we also may want to check the registry, drivers, and services being used, as well as our startup routines. Some tools are **SysAnalyzer**, **Tiny Watcher**, **Active Registry Monitor**, and **Regshot**. Many anti-malware and malware scanners will watch for registry errors. **Malwarebytes** will display all questionable registry settings it finds on a scan.
+
+> Windows automatically runs everything located in Run, RunServices, RunOnce, and RunServicesOnce. These are settings related to HKEY_LOCAL_MACHINE.
+
+Other tools to check service and processes: Windows Service Manager, Service Manager Plus, and Smart Utility.
+
+---
+<u>**Viruses and Worms**</u>
 
 
 
