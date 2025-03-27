@@ -111,13 +111,140 @@ Another option to check ports is CurrPorts from Nirsoft (https://www.nirsoft.net
 
 In windows, we also may want to check the registry, drivers, and services being used, as well as our startup routines. Some tools are **SysAnalyzer**, **Tiny Watcher**, **Active Registry Monitor**, and **Regshot**. Many anti-malware and malware scanners will watch for registry errors. **Malwarebytes** will display all questionable registry settings it finds on a scan.
 
-> Windows automatically runs everything located in Run, RunServices, RunOnce, and RunServicesOnce. These are settings related to HKEY_LOCAL_MACHINE.
+> Windows automatically runs everything located in **Run, RunServices, RunOnce, and RunServicesOnce**. These are settings related to HKEY_LOCAL_MACHINE.
 
 Other tools to check service and processes: Windows Service Manager, Service Manager Plus, and Smart Utility.
 
 ---
 <u>**Viruses and Worms**</u>
 
+- **Virus**: A self-replicating program that reproduces its code by attacjing copies into other executable codes. They usually get installed on a system via file attachements, user clicks on embedded e-mails, or the installation of pirated software, and while some viruses are nothing more than just annoyances.
 
+> *Virus hoax* or *fake anti-malware*: The process involves letting a target know about a terrible virus running rampant through the world and then providing them an anti-malware program (or signature file) to protect themselves with.
 
+Some obvious indicators are: slower response time, computer and browser freezes, and repeated, continual hard drive accesses. 
+
+Others not so obvious: drive letters night change and files and folder may disappear or become inaccesible.
+
+Recovery measures may be a good option to restablish the systems.
+
+> Some options to make your own virus: **Sonic Bat, PoisonVirus Maker, Sam's Virus Generator, and JPS Virus Maker**
+
+**Ransomware**: This is one of the type of malicious software designed to deny access to a computer system or data until a ransom is paid, and tipically spreads through phishing e-mails or by unknowing visits to an infected website. Ransomware locks you out of your own system resources and demands an online payment of some sort in order to release them back to you.
+
+The most famous ransomware and effective in the history so far:
+- WannaCry: On May 12, 2017, a system in Asia was the first to fall victim to the WannaCry ransomware. Within the 24 hours, it had spread to over 230,000 machines in 150 countries by taking advantage of an unpatched SMB exploit known as **"Eternal Blue"**.
+
+> The ransomware family includes examples such as Dharma, eCh0raix (targeting Linux devices with QNAP NAS), and SamSam (uses RSA-2048 asymmetric encryption). Some others of note include CryptorBit. CryptoLocker, CryptoDefense, and Petya (a close cousin of WannaCry that spread using the Windows Management Instrumentation command line).
+
+**Worm**: A self-replicating malware computer program that uses a computer network to send copies of itself to other systems **without human intervantion**. Usually it doesn't alter files, but it resides in active memory and duplicates itself. One example of it, is Botnet, monero, bondat, and beapy. Some worm makers: Internet Worm Maker Thing, Batch Worm Generator, and C++ Worm Generator.
+
+---
+
+<u>**Fileless Malware**</u>
+
+Also known as **non-malware**, is a type of malicious software that uses legitimate programs to infect a computer. It does not rely on files and leaves no footprint, making it challenging to detect and remove.
+
+Some examples of this type of malware are: Frodo, Number of the Beast, and The Dark Avenger. The last ones that came in the exam: Divergent (using registry for execution, persistence, and storage, and PowerShell to interject into other processes) and Duqu (making use of a TrueType font-related problem in win32k.sys).
+
+This doesn't require *installation* of any code on a target's system and resides in RAM, using native, legitimate tools that are already part of the target system to execute attacks. 
+
+The entry point is done through the same old methods: phishing e-mails, malicious websites, infected documents, malicious downloads, and links that look legitimate. 
+
+<u>**Malware Analysis**</u>
+
+It is the process of reverse engineering a piece of malicious software to discover important information about its makeup. Data points you'd be looking at in this effort include point of origin, how it actually works, what impact it might have from a growth perspective, and so forth.
+
+There are two main methods of malware analysis - static and dynamic. *Static malware analysis* (aka *static code analysis*) is simply going through the executable code to understand the malware package. No code is executed and binaries are reviewed. There are 7 major techniques for performing static malware analysis:
+
+- **File fingerprinting**: Simple process of computing a hash value for the code to identify it and compare for changes. Some tools:
+  - HashMyFiles (https://www.nirsoft.net/utils/hash_my_files.html)
+  - Mimikatz (https://github.com/ParrotSec/mimikatz)
+  - MD5sums (https://www.pc-tools.net/win32/md5sums/)
+- **Malware scanning (local and online)**: The use of anti-malware scanner.
+- **Perform strings search**: Strings can be notes in the code from the programmer to denote what a particular section is doing, error messages  coded on, or specific items programmed in to communicate from the application to the user. Some tools to perform String searches: 
+  - BinText (https://www.aldeid.com/wiki/BinText)
+  - FLOSS 
+  - Strings (https://learn.microsoft.com/es-es/sysinternals/downloads/strings)
+- **Identify packing/obfuscation**: You can use tools like PEiD (https://www.aldeid.com/wiki/PEiD) to provide details about the executable, includng signatures for common packers, crypters, and compilers.
+- **Identify portable executables (PE) information**: PE is the executable file format for Windows operating systems, encapsulating information necessary for Windows OS loaders to manage wrapped executable code. Some tools to analyze the metadata are:
+  - PE.Explorer (https://www.heaventools.com/pe-explorer-es.htm)
+  - PEView (https://www.aldeid.com/wiki/PEView)
+  - Resource Hacker (https://www.angusj.com/resourcehacker/)
+- **Identify file dependencies**: For any file to work, it has to interact with internal system files. Some tools:
+  - Dependendy Walker (https://www.dependencywalker.com/)
+  - Snyk (https://snyk.io/)
+  - Dependency-check (https://jeremylong.github.io/DependencyCheck/): To find these import and export functions (in the kernel32.dll file), along with DLLs and library functions.
+- **Malware disassembly**: Disassemblind the code to examine the assembly code instructions. IDA (https://hex-rays.com/ida-free) is a disassembler/debugger application that can help with this, providing information on funcion tracing, read/write executions, and instruction tracing.
+
+More tools that helps identify malware:
+
+- Hybrid Analysis (https://www.hybrid-analysis.com/)
+- Jotti (https://virusscan.jotti.org/es-ES)
+- Online Scanner (https://www.fortiguard.com/faq/onlinescanner)
+- VirusTotal (https://www.virustotal.com/gui/home/upload)
+- Volatility (https://volatilityfoundation.org/) -> Apart from analysis and forensic in general, they introduced the concept of analyzing the runtime state of a system using the data found in volatile storage (RAM).
+
+---
+
+*Dynamic malware analysis* is a bit different. The malware is put on an *sandbox* (isolated system) to execute it. People who do this, must be so cautious, dynamic is done only to analyze the behavior of the malware. Using a Virtual Machine with NIC in host-only mode and no open shares is a good start.
+
+Several tools are used to check the behavior, before and after the execution, so you need to take a snapshot.We can check the change by analyzing ports (CurrPorts, Port Monitor and Process Explorer), network traffic (Capsa, SolarWinds NetFlow Traffic Analyzer), DNS (DNSstuff and DNSQuerySniffer), examining actual installation steps the malware uses (Mirekusoft Install Monitor and SysAnalyzer) and file and folder monitoring (Tripwire, Versisys and PA File Sight). Have a look at API monitor or APImetrics if you want to check calls allowing the malware to access system files.
+
+<u>**Malware Countermeasures**</u>
+
+To protect ourselves, we can use the tools mentioned earlier regarding, ports, network, system files and folder. 
+
+It is recommendable to use a good anti-malware program and keep it updated. Malware move quickly in the modern world, and most of it runs and is kept in memory versus on the disk. Signatured-based AV simply can't keep up, and heuristic AV simply isn't much better.
+
+> Emotet is a common banking Trojan (usually spread via a URL in an e-mail) that creates a file called cultureresource.exe, encrypts everything it tries to do, and communicates with a command-and-control external server. SamSam is well-known ransomware that uses brute-force tactics against RDP.
+
+It is also suggested to use a *sheepdip* system, it is set up to check physical media, device drivers, and other files for malware before it is introduced to the network. It is isolated and configured with a couple of different AV programs, and other tools mentioned earlier to verify.
+
+> Some words we should bear in mind. Terms such as *netizen* (aka cybercitizen: a person actively involved in online communities) and *technorati* (a blog search engine and an old, old term of endearment for aging techno-geeks).
+
+---
+
+## Remaining Attcks
+
+<u>**Denial of Service**</u>
+
+Seeks to to accomplish nothing more than taking down a system or simply denying access to it by authorized users. 
+
+The *distributed denial-of-service (DDoS) attack*, comes not from one system but many, and they're usually part of a botnet. Remember that a *botnet* is a network of zombie computers the hacker can use to start a distributed attack from (examples of botnet software/Trojans are Shark and Poison Ivy). 
+
+> Another way of saying "botnet" may be the *distributed reflection denial-of-service (DRDoS) attack*, also known as a *spoof attack*. It uses multiple intermediary machines to pull off the denial of service, by having the secondary machines send the attack at the behest of the attacker.
+
+ECC lists 3 basic categories of DoS/DDoS: 
+- *Volumetric attacks*: Consume bandwidth resources so the target cannot function. 
+- *Protocol attacks*: Consume other types of resources, such as flooding SYN connection requests, fragmentation, or spoofed sessions.
+- *Application layer attacks*: Aimed at specific application, consuming resources to render it kaput.
+
+We'll list some examples of DoS/DDoS attacks:
+- **TCP state-exhaustion attacks**: These attacks gp after load balancers, firewalls, and application servers by attemting to consume their connection state tables.
+- **UDP flood**: Attacker spoof UDP packets at a high rate to random ports on the target, using a large source IP address range.
+- **SYN attack**: The hacker sends thousands of SYN packets to the machine with a *false source IP address*. The machine attempts to respond with a SYN/ACK but will be unsuccessful (because the address is false). 
+- **SYN flood**: The hacker sends thousands of SYN packets to the target but never responds to any of the return SYN/ACK packets. Because there is a certain amount of time the target must wait to receive an answer to the SYN/ACK, it will eventually bog down and run out of available connections.
+- **ICMP flood**: The attacker sends ICMP Echo packets to the target with a spoofed (fake) source address. The target continues to respond to an address that doesn't exist and eventually reaches a limit of packets per second sent.
+- **Smurf**: The attacker sends a large number of pings to the broadcast address of the subnet, with the source IP address spoofed to that of the target. The entire subnet then begins sending ping responses to the target, exhausting the resources there. A ***fraggle*** attack is similar but uses UDP for the same purposes.
+- **Ping of death**: The attacker fragments an ICMP message to send to a target. When the fragments are reassembled, the resultant ICMP packet is larger than the maximum size and crashes the system. (This is not valid in modern systems, but is worthing to know)
+- **Teardrop**: Attacker sends a large number of garbled IP fragments with overlapping, oversized payloads to the target machine. On older operating systems (such as Windows 3.1x, Windows 95, and Windows NT), this takes advantage of weaknesses in the fragment reassembly functionality of their TCP/IP stack, causing the system to crash or reboot.
+- **Pulse wave**: The hacker sends highly repetitive and periodic groups of packets to the target on a regular basis (every ten minutes).
+- **Zero day**: As the name indicates, this is a DDoS attack that takes advantage of a vulnerability before it is known and patched/mitigated by the target.
+- **Permanent**: *Phlashing* refers to a DoS attack that causes permanent damage to a system. Usually this includes damage to the hardware and can also be known as *bricking* a system.
+
+> Protocol attacks are measured in packets per second (pps), while Application layer attacks are measured in requests per second (rps).
+
+Some tools to perform DoS on systems, such as:
+- Low Orbit Ion Cannon (LOIC): is a simple-to-use DDoS tool that floods a targetwith TCP, UDP, or http requests. It was used in a coordinated attack against Sony's PlayStation network, and even got success against other companies, Recording Industry Associtation of America, Paypal, Mastercard, etc.
+- Trinity:  Linux-based DDoS tool much like LOIC.
+- Tribe Flood Network: Similar to others, using voluntary botnet systems to launch massive flood attacks on targets.
+- R-U-Dead-Yet (RUDY): Performs DoS with HTTP POST via long-form flied submissions. 
+- Slowloris: TCP DoS tool that ties up open sockets and causes services to hang. It's useful against web servers (at least Apache and others - Nginx isn't vulnerable to this) and doesn't consume large amounts of bandwidth (https://www.imperva.com/learn/ddos/slowloris/?redirect=Incapsula).
+
+Regarding countermeasures against DoS attacks, actions such as disabling unnecessary services, using a good firewall policy, and keeping security patches and upgrades up to date are pretty standard fare. Additionally, the use of NIDS can help. Using tools like  Skydance can help detect and prevent DoS attacks.
+
+> The real answer to a true DDoS is the involvement of your ISP up channel. It will be next to impossible for you, at an endpoint locale, to keep up with attacks from a sophisticated global (or even geographically close) botnet. The ISP may wind up blocking a lot of legitimate traffic, too, but it may be all you can do until the storm passes.
+
+<u>**Session Hijacking**</u>
 
